@@ -1,0 +1,39 @@
+{
+  "name": "ticket-queue",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Production-shaped IT service-desk ticketing application",
+  "type": "module",
+  "license": "MIT",
+  "engines": {
+    "node": ">=22.18"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "start": "node dist/server.js",
+    "dev": "tsx watch src/server.ts",
+    "typecheck": "tsc --noEmit",
+    "test": "NODE_ENV=test node --import tsx --test --test-concurrency=1 test/*.test.ts",
+    "test:watch": "node --import tsx --test --watch --test-concurrency=1 test/*.test.ts",
+    "migrate": "tsx src/db/migrate-cli.ts",
+    "seed": "tsx src/db/seed-cli.ts",
+    "acceptance": "node scripts/acceptance.mjs",
+    "screenshots": "node scripts/screenshots.mjs"
+  },
+  "dependencies": {
+    "@fastify/cookie": "^11.1.5",
+    "@fastify/formbody": "^9.0.1",
+    "@fastify/helmet": "^13.2.0",
+    "@fastify/static": "^10.1.9",
+    "fastify": "^5.12.8",
+    "pg": "^8.23.1",
+    "zod": "^4.6.7"
+  },
+  "devDependencies": {
+    "@types/node": "^26.6.6",
+    "@types/pg": "^8.23.1",
+    "playwright": "^1.64.1",
+    "tsx": "^4.23.15",
+    "typescript": "^7.0.2"
+  }
+}
