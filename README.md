@@ -92,6 +92,20 @@ Tests cover all 25 from/to status pairs, the SLA policy boundary, password
 hashing, role checks, search/filtering, both audit-log mutation paths, the HTML
 states, and the complete ticket lifecycle.
 
+### Continuous integration
+
+The workflow at `.github/workflows/ci.yml` runs on every push to `main` and on
+pull requests. The most recent run on `main` is green:
+
+- Run: <https://github.com/cashewna/ticket-queue/actions/runs/41895954573>
+- `Unit and integration tests`: `npm ci`, `npm run typecheck`, `npm run build`
+  and `npm test` against a `postgres:16` service container.
+- `Compose smoke test`: `docker compose up -d --build`, wait for `/healthz`,
+  run `scripts/acceptance.mjs` (create → assign → comment → resolve → close),
+  then tear the stack down.
+
+Both jobs completed with `success` for commit `76ca1d9`.
+
 ## Architecture
 
 ```
